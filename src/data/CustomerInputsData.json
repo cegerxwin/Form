@@ -1,0 +1,40 @@
+{
+  "customerInputsData": [
+    {
+      "labelName": "Name",
+      "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "text",
+      "name": "inputName"
+    },
+    {
+      "labelName": "E-Mail",
+      "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "text",
+      "name": "inputEmail"
+    },
+    {
+      "labelName": "Password",
+      "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "text",
+      "name": "inputPassword"
+    },
+    {
+      "labelName": "Birthdate",
+      "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "text",
+      "name": "inputBirthDate"
+    },
+    {
+      "labelName": "Phone Number",
+      "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "text",
+      "name": "inputPhoneNumber"
+    },
+    {
+      "labelName": "Address",
+      "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "text",
+      "name": "inputAddress"
+    }
+  ]
+}
