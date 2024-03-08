@@ -2,23 +2,29 @@ import { useState, useRef, useEffect } from "react";
 import Button from "../UI/Button/Button";
 import FormItem from "./FormItem";
 import customerInputsData from "../../data/CustomerInputsData.json";
+import ErrorModal from "../UI/Modal/ErrorModal";
 
 const initialState = {
   inputName: "",
   inputEmail: "",
   inputPassword: "",
-  inputBirthDate: "",
+  /*   inputBirthDate: "",
   inputinputPhoneNumber: "",
-  inputAddress: "",
+  inputAddress: "", */
 };
 
 function Form() {
   const [customerInput, setCustomerInput] = useState(initialState);
   const [customerData, setCustomerData] = useState([]);
+  const [formData, setFormData] = useState(customerInputsData);
+  const [isShowError, setIsShowError] = useState(false);
+
   const [birthVisible, setBirthVisible] = useState(false);
   const [phoneVisible, setPhoneVisible] = useState(false);
   const [addressVisible, setAddressVisible] = useState(false);
   const formRef = useRef();
+
+  //console.log(formData.customerInputsData);
 
   useEffect(() => {
     // İlk input'a otomatik olarak focus yapmak için.
@@ -40,10 +46,19 @@ function Form() {
 
     if (!isFormValid) {
       console.log("Tüm alanları doldurun.");
+      setIsShowError(true);
       return;
     }
 
     setCustomerData((prevState) => [customerInput, ...prevState]);
+    setCustomerInput({
+      inputName: "",
+      inputEmail: "",
+      inputPassword: "",
+      inputBirthDate: "",
+      inputinputPhoneNumber: "",
+      inputAddress: "",
+    });
   }
 
   return (
@@ -60,7 +75,7 @@ function Form() {
           onSubmit={handleSubmit}
           ref={formRef}>
           <div className="flex flex-col gap-y-2">
-            {customerInputsData.customerInputsData.map((item) => (
+            {formData.customerInputsData.map((item) => (
               <FormItem
                 key={item.name}
                 labelName={item.labelName}
@@ -68,6 +83,8 @@ function Form() {
                 name={item.name}
                 labelClassName={item.labelClassName}
                 onChange={handleChange}
+                value={customerInput[item.name]}
+                isVisible={item.isVisible}
               />
             ))}
             <div className="relative z-0 w-full mb-5">
@@ -82,7 +99,7 @@ function Form() {
                       type="checkbox"
                       value=""
                       onClick={(e) => setBirthVisible(e.target.checked)}
-                      checked={birthVisible}
+                      defaultChecked={birthVisible}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <span
@@ -99,7 +116,7 @@ function Form() {
                       type="checkbox"
                       value=""
                       onClick={(e) => setPhoneVisible(e.target.checked)}
-                      checked={phoneVisible}
+                      defaultChecked={phoneVisible}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <span
@@ -116,7 +133,7 @@ function Form() {
                       type="checkbox"
                       value=""
                       onClick={(e) => setAddressVisible(e.target.checked)}
-                      checked={addressVisible}
+                      defaultChecked={addressVisible}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
                     <span
@@ -136,6 +153,7 @@ function Form() {
                   className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                   placeholder=" "
                   onChange={handleChange}
+                  value=""
                 />
                 <label
                   htmlFor="birthDate"
@@ -152,6 +170,7 @@ function Form() {
                   className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                   placeholder=" "
                   onChange={handleChange}
+                  value=""
                 />
                 <label
                   htmlFor="phoneNumber"
@@ -168,6 +187,7 @@ function Form() {
                   className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                   placeholder=" "
                   onChange={handleChange}
+                  value=""
                 />
                 <label
                   htmlFor="address"
@@ -228,6 +248,13 @@ function Form() {
           <Button className="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none">
             Add Information
           </Button>
+          <ErrorModal
+            setIsShowError={setIsShowError}
+            isShowError={isShowError}
+            message={
+              "All fields must be filled and must not contain blank characters."
+            }
+          />
         </form>
       </div>
     </div>

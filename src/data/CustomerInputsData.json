@@ -4,19 +4,29 @@
       "labelName": "Name",
       "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
       "type": "text",
-      "name": "inputName"
+      "name": "inputName",
+      "isVisible": true
     },
     {
       "labelName": "E-Mail",
       "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
       "type": "text",
-      "name": "inputEmail"
+      "name": "inputEmail",
+      "isVisible": true
     },
     {
       "labelName": "Password",
       "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
       "type": "text",
-      "name": "inputPassword"
+      "name": "inputPassword",
+      "isVisible": true
+    },
+    {
+      "labelName": "Address",
+      "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "textarea",
+      "name": "inputHidden",
+      "isVisible": false
     }
   ]
 }
