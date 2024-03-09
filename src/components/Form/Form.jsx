@@ -10,6 +10,9 @@ const initialState = {
   inputEmail: "",
   inputPassword: "",
   inputConfirmPassword: "",
+  inputBirthDate: "",
+  inputPhoneNumber: "",
+  inputAddress: "",
 };
 
 function Form() {
@@ -18,6 +21,7 @@ function Form() {
   const [formData, setFormData] = useState(customerInputsData);
   const [isShowError, setIsShowError] = useState(false);
   const [isopenModal, setIsOpenModal] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const formRef = useRef();
 
@@ -25,8 +29,23 @@ function Form() {
     formRef.current.inputName.focus();
   }, []);
 
+  const filteredInputs = formData.customerInputsData.filter(
+    (input) => input.isVisible
+  );
+
   function handleChange({ target: { name, value } }) {
     setCustomerInput({ ...customerInput, [name]: value });
+
+    // handleChange fonksiyonu içinde input alanının değerini kontrol ederek isFormValid'i güncelle
+    const isFormValid = filteredInputs.every((input) => {
+      if (input.name === name) {
+        return value.trim() !== ""; // Eğer değişen input'un değeri boş değilse true döndür
+      }
+      return true; // Diğer inputlar için doğrulama yapma, her zaman true döndür
+    });
+
+    // isFormValid'i güncelle
+    setIsFormValid(isFormValid);
   }
 
   const handleCheckboxChange = (name) => {
@@ -49,9 +68,14 @@ function Form() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const isFormValid = Object.values(customerInput).every(
+    const isFormValid = filteredInputs.every((input) => {
+      const value = customerInput[input.name] || ""; // Input'un değerini al, eğer boşsa varsayılan olarak boş string ata
+      return value.trim() !== "";
+    });
+
+    /*     const isFormValid = Object.values(filteredNames).every(
       (value) => value.trim() !== ""
-    );
+    ); */
 
     if (!isFormValid) {
       setIsShowError(true);
@@ -60,7 +84,8 @@ function Form() {
 
     setIsOpenModal(true);
 
-    // setCustomerData((prevState) => [customerInput, ...prevState]);
+    setCustomerData((prevState) => [customerInput, ...prevState]);
+    console.log(customerInput);
     /*     setCustomerInput({
       inputName: "",
       inputEmail: "",
@@ -218,6 +243,7 @@ function Form() {
           <OpenModal
             setIsOpenModal={setIsOpenModal}
             isopenModal={isopenModal}
+            customerInput={customerInput}
             message={"Bilgileri girdin"}
           />
         </form>

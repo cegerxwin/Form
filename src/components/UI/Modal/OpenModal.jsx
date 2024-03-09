@@ -15,17 +15,41 @@ const ErrorModal = (props) => {
               className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
               onClick={() => props.setIsOpenModal(false)}></div>
             <div className="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50">
-              <div className="bg-indigo-500 text-white px-4 py-2 flex justify-between">
+              <div className="bg-pink-500 text-white px-4 py-2 flex justify-between">
                 <h2 className="text-lg font-semibold">Modal Title</h2>
               </div>
               <div className="p-4 text-black">
-                <p>{props.message}</p>
+                <p>
+                  Username: <strong>{props.customerInput.inputName}</strong>
+                </p>
+                <p>
+                  Email: <strong>{props.customerInput.inputEmail}</strong>
+                </p>
+                <p>
+                  Password: <strong>{props.customerInput.inputPassword}</strong>
+                </p>
+                <p>
+                  Birth Date:{" "}
+                  <strong>{props.customerInput.inputBirthdate}</strong>
+                </p>
+                <p>
+                  Phone Number:{" "}
+                  <strong>{props.customerInput.inputPhoneNumber}</strong>
+                </p>
+                <p>
+                  Address: <strong>{props.customerInput.inputAddress}</strong>
+                </p>
               </div>
-              <div className="border-t px-4 py-2 flex justify-end">
+              <div className="border-t px-4 py-2 flex gap-3 justify-center">
                 <button
-                  className="px-3 py-1 bg-indigo-500 text-white  rounded-md w-full sm:w-auto"
+                  className="px-3 py-1 bg-green-500 text-white  rounded-md w-full sm:w-auto"
                   onClick={() => props.setIsOpenModal(false)}>
-                  Close
+                  I confirm my information
+                </button>
+                <button
+                  className="px-3 py-1 bg-yellow-500 text-white  rounded-md w-full sm:w-auto"
+                  onClick={() => props.setIsOpenModal(false)}>
+                  I will edit my information
                 </button>
               </div>
             </div>
