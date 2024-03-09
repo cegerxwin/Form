@@ -22,10 +22,24 @@
       "isVisible": true
     },
     {
+      "labelName": "Birth Date",
+      "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "number",
+      "name": "inputBirthDate",
+      "isVisible": false
+    },
+    {
+      "labelName": "Phone Number",
+      "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
+      "type": "number",
+      "name": "inputPhoneNumber",
+      "isVisible": false
+    },
+    {
       "labelName": "Address",
       "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
       "type": "textarea",
-      "name": "inputHidden",
+      "name": "inputAddress",
       "isVisible": false
     }
   ]

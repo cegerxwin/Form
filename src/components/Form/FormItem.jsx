@@ -1,4 +1,4 @@
-import { string, func } from "prop-types";
+import { string, func, bool } from "prop-types";
 
 function FormItem({
   labelName,
@@ -39,4 +39,5 @@ FormItem.propTypes = {
   labelClassName: string,
   onChange: func,
   value: string,
+  isVisible: bool,
 };
