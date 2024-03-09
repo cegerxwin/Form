@@ -9,6 +9,7 @@ function FormExtraItem({ labelName, type, name, onChange, labelClassName }) {
         className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
         placeholder=" "
         onChange={onChange}
+        {name === "inputBirthDate" ? max="2010" min="1900" max-length="4" : ""}
       />
       <label htmlFor={name} className={labelClassName}>
         {labelName}

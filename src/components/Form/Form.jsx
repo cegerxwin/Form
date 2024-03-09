@@ -3,14 +3,13 @@ import Button from "../UI/Button/Button";
 import FormItem from "./FormItem";
 import customerInputsData from "../../data/CustomerInputsData.json";
 import ErrorModal from "../UI/Modal/ErrorModal";
+import OpenModal from "../UI/Modal/OpenModal";
 
 const initialState = {
   inputName: "",
   inputEmail: "",
   inputPassword: "",
-  inputBirthDate: "",
-  inputPhoneNumber: "",
-  inputAddress: "",
+  inputConfirmPassword: "",
 };
 
 function Form() {
@@ -18,6 +17,7 @@ function Form() {
   const [customerData, setCustomerData] = useState([]);
   const [formData, setFormData] = useState(customerInputsData);
   const [isShowError, setIsShowError] = useState(false);
+  const [isopenModal, setIsOpenModal] = useState(false);
 
   const formRef = useRef();
 
@@ -58,8 +58,18 @@ function Form() {
       return;
     }
 
-    setCustomerData((prevState) => [customerInput, ...prevState]);
-    setCustomerInput(initialState);
+    setIsOpenModal(true);
+
+    // setCustomerData((prevState) => [customerInput, ...prevState]);
+    /*     setCustomerInput({
+      inputName: "",
+      inputEmail: "",
+      inputPassword: "",
+      inputConfirmPassword: "",
+      inputBirthDate: "",
+      inputPhoneNumber: "",
+      inputAddress: "",
+    }); */
   }
 
   return (
@@ -204,6 +214,11 @@ function Form() {
             message={
               "All fields must be filled and must not contain blank characters."
             }
+          />
+          <OpenModal
+            setIsOpenModal={setIsOpenModal}
+            isopenModal={isopenModal}
+            message={"Bilgileri girdin"}
           />
         </form>
       </div>
