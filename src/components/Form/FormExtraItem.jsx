@@ -3,13 +3,11 @@ function FormExtraItem({ handleCheckboxChange, labelName }) {
   return (
     <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
       <div className="flex items-center ps-3">
-        <input
-          type="checkbox"
-          value=""
-          onChange={handleCheckboxChange}
-          defaultChecked={""}
-          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-        />
+        <button
+          onClick={handleCheckboxChange}
+          className="mr-2 text-white end-2.5 bottom-2.5 bg-green-600 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          +
+        </button>
         <span
           htmlFor="vue-checkbox-list"
           className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
