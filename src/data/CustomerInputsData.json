@@ -22,7 +22,7 @@
     {
       "labelName": "Password",
       "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
-      "type": "password",
+      "type": "text",
       "name": "inputPassword",
       "errorMessage": "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
       "pattern": "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
@@ -32,10 +32,10 @@
     {
       "labelName": "Confirm Password",
       "labelClassName": "after:content-['*'] after:ml-0.5 after:text-red-500 absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
-      "type": "password",
+      "type": "text",
       "name": "inputConfirmPassword",
       "errorMessage": "Passwords don't match!",
-      "pattern": "customerInputsData.password",
+      "pattern": "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$",
       "isVisible": true,
       "required": true
     },
@@ -51,10 +51,10 @@
     {
       "labelName": "Phone Number",
       "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
-      "type": "number",
+      "type": "tel",
       "name": "inputPhoneNumber",
-      "errorMessage": "Please add your valid phone number",
-      "pattern": "^(05)[0-9][0-9][s]([0-9]){3}[s]([0-9]){2}[s]([0-9]){2}",
+      "errorMessage": "Please add your valid gsm phone number",
+      "pattern": "^(?:\\+90.?5|0090.?5|905|0?5)(?:[01345][0-9])\\s?(?:[0-9]{3})\\s?(?:[0-9]{2})\\s?(?:[0-9]{2})$",
       "isVisible": false,
       "required": false
     },
@@ -63,8 +63,8 @@
       "labelClassName": "absolute duration-300 top-3 -z-1 origin-0 text-gray-500",
       "type": "textarea",
       "name": "inputAddress",
-      "errorMessage": "Please add your valid address",
-      "pattern": "^[a-zA-Z0-9s,'-]*$",
+      "errorMessage": "Please add your valid address. Your address should be 3-150 characters and shouldn't character!",
+      "pattern": "^[a-zA-Z0-9]{3,150}$",
       "isVisible": false,
       "required": false
     }

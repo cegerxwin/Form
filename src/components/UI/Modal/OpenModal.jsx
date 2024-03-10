@@ -30,7 +30,7 @@ const ErrorModal = (props) => {
                 </p>
                 <p>
                   Birth Date:{" "}
-                  <strong>{props.customerInput.inputBirthdate}</strong>
+                  <strong>{props.customerInput.inputBirthDate}</strong>
                 </p>
                 <p>
                   Phone Number:{" "}

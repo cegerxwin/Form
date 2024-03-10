@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { string, func, bool } from "prop-types";
+import "./FormItem.css";
 
 function FormItem({
   labelName,
@@ -9,7 +11,9 @@ function FormItem({
   value,
   isVisible,
   pattern,
+  errorMessage,
 }) {
+  const [focused, setFocused] = useState(false);
   return (
     <>
       {isVisible && (
@@ -17,7 +21,7 @@ function FormItem({
           <input
             type={type}
             name={name}
-            className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+            className="input-item pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
             placeholder=" "
             value={value}
             pattern={pattern}
@@ -25,10 +29,14 @@ function FormItem({
             max={name === "inputBirthDate" ? "2010" : undefined}
             min={name === "inputBirthDate" ? "1900" : undefined}
             maxLength={name === "inputBirthDate" ? "4" : undefined}
+            focused={focused.toString()}
+            onBlur={() => setFocused(true)}
+            onFocus={() => name === "confirmPassword" && setFocused(true)}
           />
           <label htmlFor={name} className={labelClassName}>
             {labelName}
           </label>
+          <span className="span-item text-red-500">{errorMessage}</span>
         </div>
       )}
     </>
@@ -45,5 +53,6 @@ FormItem.propTypes = {
   onChange: func,
   value: string,
   pattern: string,
+  errorMessage: string,
   isVisible: bool,
 };

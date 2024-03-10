@@ -22,6 +22,7 @@ function Form() {
   const [isShowError, setIsShowError] = useState(false);
   const [isopenModal, setIsOpenModal] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const formRef = useRef();
 
@@ -118,8 +119,10 @@ function Form() {
                 type={item.type}
                 name={item.name}
                 labelClassName={item.labelClassName}
+                pattern={item.pattern}
                 onChange={handleChange}
                 value={customerInput[item.name]}
+                errorMessage={item.errorMessage}
                 isVisible={item.isVisible}
               />
             ))}
