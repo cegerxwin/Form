@@ -1,7 +1,7 @@
 # React + Vite
 To run this project,
 
-npm install
+npm install,
 npm run dev
 
 ![a1](https://github.com/cegerxwin/Form/assets/31402706/005151a2-a975-4e36-bf48-f4e073c1d103)
