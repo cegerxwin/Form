@@ -2,9 +2,11 @@
 To run this project,
 
 npm install,
+
 npm run dev
 
 https://form-dcw9.vercel.app/
+
 https://customer-registration-form.netlify.app
 
 ![a1](https://github.com/cegerxwin/Form/assets/31402706/005151a2-a975-4e36-bf48-f4e073c1d103)
