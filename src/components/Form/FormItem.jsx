@@ -12,6 +12,8 @@ function FormItem({
   isVisible,
   pattern,
   errorMessage,
+  required,
+  handleCheckboxChange,
 }) {
   const [focused, setFocused] = useState(false);
   return (
@@ -33,6 +35,13 @@ function FormItem({
             onBlur={() => setFocused(true)}
             onFocus={() => name === "confirmPassword" && setFocused(true)}
           />
+          {!required && (
+            <button
+              onClick={handleCheckboxChange}
+              className="mr-2 text-white absolute end-2.5 bottom-2.5 bg-red-800 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              X
+            </button>
+          )}
           <label htmlFor={name} className={labelClassName}>
             {labelName}
           </label>
@@ -55,4 +64,6 @@ FormItem.propTypes = {
   pattern: string,
   errorMessage: string,
   isVisible: bool,
+  required: bool,
+  handleCheckboxChange: func,
 };

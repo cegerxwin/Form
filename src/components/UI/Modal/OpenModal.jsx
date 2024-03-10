@@ -27,7 +27,7 @@ const OpenModal = (props) => {
                       <div className="rounded-full bg-slate-200 h-10 w-10"></div>
                       <div className="flex-1 space-y-6 py-1">
                         <div className="h-2 bg-slate-200 rounded"></div>
-                        <div className="space-y-3  text-3xl font-semibold text-pink-500">
+                        <div className="space-y-3  text-3xl font-semibold text-pink-500 text-center">
                           Thank you for your patience.
                         </div>
                         <div className="space-y-3 ">

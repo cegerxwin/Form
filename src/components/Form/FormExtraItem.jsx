@@ -1,29 +1,28 @@
 import { string, func } from "prop-types";
-
-function FormExtraItem({ labelName, type, name, onChange, labelClassName }) {
+function FormExtraItem({ handleCheckboxChange, labelName }) {
   return (
-    <div className="relative z-0 w-full mb-5">
-      <input
-        type={type}
-        name={name}
-        className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-        placeholder=" "
-        onChange={onChange}
-        {name === "inputBirthDate" ? max="2010" min="1900" max-length="4" : ""}
-      />
-      <label htmlFor={name} className={labelClassName}>
-        {labelName}
-      </label>
-    </div>
+    <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+      <div className="flex items-center ps-3">
+        <input
+          type="checkbox"
+          value=""
+          onChange={handleCheckboxChange}
+          defaultChecked={""}
+          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+        />
+        <span
+          htmlFor="vue-checkbox-list"
+          className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+          {labelName}
+        </span>
+      </div>
+    </li>
   );
 }
 
 export default FormExtraItem;
 
 FormExtraItem.propTypes = {
+  handleCheckboxChange: func,
   labelName: string,
-  type: string,
-  name: string,
-  labelClassName: string,
-  onChange: func,
 };

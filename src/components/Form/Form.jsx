@@ -4,6 +4,7 @@ import FormItem from "./FormItem";
 import customerInputsData from "../../data/CustomerInputsData.json";
 import ErrorModal from "../UI/Modal/ErrorModal";
 import OpenModal from "../UI/Modal/OpenModal";
+import FormExtraItem from "./FormExtraItem";
 
 const initialState = {
   inputName: "",
@@ -17,7 +18,6 @@ const initialState = {
 
 function Form() {
   const [customerInput, setCustomerInput] = useState(initialState);
-  const [customerData, setCustomerData] = useState([]);
   const [formData, setFormData] = useState(customerInputsData);
   const [isShowError, setIsShowError] = useState(false);
   const [isopenModal, setIsOpenModal] = useState(false);
@@ -98,8 +98,6 @@ function Form() {
     }
 
     setIsOpenModal(true);
-
-    //setCustomerData((prevState) => [customerInput, ...prevState]);
   }
 
   return (
@@ -128,59 +126,27 @@ function Form() {
                 value={customerInput[item.name]}
                 errorMessage={item.errorMessage}
                 isVisible={item.isVisible}
+                required={item.required}
+                handleCheckboxChange={handleCheckboxChange(item.name)}
               />
             ))}
             <div className="relative z-0 w-full mb-5">
-              <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
+              <h3 className="extInformation mb-4 font-semibold text-gray-900 dark:text-white">
                 Do you want to add extra information?
               </h3>
               <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      type="checkbox"
-                      value=""
-                      onChange={handleCheckboxChange("inputBirthDate")}
-                      defaultChecked={""}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <span
-                      htmlFor="vue-checkbox-list"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                      Birth Date
-                    </span>
-                  </div>
-                </li>
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      type="checkbox"
-                      value=""
-                      onChange={handleCheckboxChange("inputPhoneNumber")}
-                      defaultChecked={""}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <span
-                      htmlFor="react-checkbox-list"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                      Phone Number
-                    </span>
-                  </div>
-                </li>
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      type="checkbox"
-                      value=""
-                      onChange={handleCheckboxChange("inputAddress")}
-                      defaultChecked={""}
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                      Address
-                    </span>
-                  </div>
-                </li>
+                {formData.customerInputsData.map(
+                  (item) =>
+                    !item.isVisible && (
+                      <FormExtraItem
+                        key={item.name}
+                        name={item.name}
+                        labelName={item.labelName}
+                        labelClassName={item.labelClassName}
+                        handleCheckboxChange={handleCheckboxChange(item.name)}
+                      />
+                    )
+                )}
               </ul>
             </div>
           </div>
