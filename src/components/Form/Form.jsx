@@ -22,7 +22,7 @@ function Form() {
   const [isShowError, setIsShowError] = useState(false);
   const [isopenModal, setIsOpenModal] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const formRef = useRef();
 
@@ -45,8 +45,26 @@ function Form() {
       return true; // Diğer inputlar için doğrulama yapma, her zaman true döndür
     });
 
-    // isFormValid'i güncelle
     setIsFormValid(isFormValid);
+  }
+
+  function handleLoading() {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsOpenModal(false);
+    }, 5000);
+
+    setCustomerInput({
+      inputName: "",
+      inputEmail: "",
+      inputPassword: "",
+      inputConfirmPassword: "",
+      inputBirthDate: "",
+      inputPhoneNumber: "",
+      inputAddress: "",
+    });
+    formRef.current.inputName.focus();
   }
 
   const handleCheckboxChange = (name) => {
@@ -70,13 +88,9 @@ function Form() {
     e.preventDefault();
 
     const isFormValid = filteredInputs.every((input) => {
-      const value = customerInput[input.name] || ""; // Input'un değerini al, eğer boşsa varsayılan olarak boş string ata
+      const value = customerInput[input.name] || "";
       return value.trim() !== "";
     });
-
-    /*     const isFormValid = Object.values(filteredNames).every(
-      (value) => value.trim() !== ""
-    ); */
 
     if (!isFormValid) {
       setIsShowError(true);
@@ -86,16 +100,6 @@ function Form() {
     setIsOpenModal(true);
 
     setCustomerData((prevState) => [customerInput, ...prevState]);
-    console.log(customerInput);
-    /*     setCustomerInput({
-      inputName: "",
-      inputEmail: "",
-      inputPassword: "",
-      inputConfirmPassword: "",
-      inputBirthDate: "",
-      inputPhoneNumber: "",
-      inputAddress: "",
-    }); */
   }
 
   return (
@@ -108,10 +112,10 @@ function Form() {
           </span>
         </h1>
         <form
-          className="flex flex-col gap-y-5 mt-10"
+          className="flex flex-col gap-y-4 mt-10"
           onSubmit={handleSubmit}
           ref={formRef}>
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-1">
             {formData.customerInputsData.map((item) => (
               <FormItem
                 key={item.name}
@@ -134,7 +138,6 @@ function Form() {
                 <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div className="flex items-center ps-3">
                     <input
-                      id="vue-checkbox-list"
                       type="checkbox"
                       value=""
                       onChange={handleCheckboxChange("inputBirthDate")}
@@ -151,7 +154,6 @@ function Form() {
                 <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div className="flex items-center ps-3">
                     <input
-                      id="react-checkbox-list"
                       type="checkbox"
                       value=""
                       onChange={handleCheckboxChange("inputPhoneNumber")}
@@ -168,16 +170,13 @@ function Form() {
                 <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                   <div className="flex items-center ps-3">
                     <input
-                      id="angular-checkbox-list"
                       type="checkbox"
                       value=""
                       onChange={handleCheckboxChange("inputAddress")}
                       defaultChecked={""}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                     />
-                    <span
-                      htmlFor="angular-checkbox-list"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    <span className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                       Address
                     </span>
                   </div>
@@ -185,7 +184,7 @@ function Form() {
               </ul>
             </div>
 
-            {/*             <fieldset className="relative z-0 w-full p-px">
+            {/* <fieldset className="relative z-0 w-full p-px">
               <legend className="absolute text-gray-500 transform scale-75 -top-3 origin-0">
                 Gender Identity
               </legend>
@@ -229,11 +228,11 @@ function Form() {
               </div>
             </fieldset> */}
           </div>
-          <p className="text-xs text-red-500 text-right my-3">
+          <p className="text-xs text-red-500 text-right">
             Required fields are marked with an asterisk{" "}
             <abbr title="Required field">*</abbr>
           </p>
-          <Button className="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none">
+          <Button className="w-full px-6 py-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none">
             Add Information
           </Button>
           <ErrorModal
@@ -246,8 +245,10 @@ function Form() {
           <OpenModal
             setIsOpenModal={setIsOpenModal}
             isopenModal={isopenModal}
+            isLoading={isLoading}
             customerInput={customerInput}
             message={"Bilgileri girdin"}
+            handleLoading={handleLoading}
           />
         </form>
       </div>
